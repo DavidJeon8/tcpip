@@ -36,19 +36,23 @@ public class ServerChat {
 	private void start() throws IOException {
 		socket = serverSocket.accept();
 		scanner = new Scanner(System.in);
-		Sender sender= new Sender();
-		Thread t = new Thread(sender);
+		
 		
 		Receiver receiver = new Receiver();
 		receiver.start();
 		
 		while (true) {
+			Sender sender= new Sender();
+			Thread t = new Thread(sender);
+			
 			System.out.println("Input Server Message.....");
 			String msg = scanner.nextLine();
 			if (msg.equals("q")) {
 				scanner.close();
+				sender.close();
 				break;
 			}
+			
 			sender.setSendMsg(msg);
 			t.start();
 		}
@@ -82,10 +86,10 @@ public class ServerChat {
 					dout.writeUTF(msg);
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println("Not Available");
 			}
-
 		}
+
 
 	}
 
@@ -111,7 +115,8 @@ public class ServerChat {
 					msg = din.readUTF();
 					System.out.println(msg);
 				} catch (IOException e) {
-					e.printStackTrace();
+					System.out.println("Exit Client User....");
+					break;
 				}
 
 			}

@@ -7,8 +7,6 @@ public class Server {
 		serverChat = new ServerChat(8888);
 		
 		
-		
-		
 
 	}
 

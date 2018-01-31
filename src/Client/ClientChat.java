@@ -19,7 +19,7 @@ public class ClientChat {
 
 	}
 
-	public ClientChat(String id, int port) {
+	public ClientChat(String ip, int port) {
 		this.ip = ip;
 		this.port = port;
 		try {
@@ -39,16 +39,18 @@ public class ClientChat {
 		}
 
 	}
+	
 
 	public void start() throws IOException {
 		scanner = new Scanner(System.in);
-		Sender sender = new Sender();
-		Thread t = new Thread(sender);
 		
 		Receiver receiver = new Receiver();
 		receiver.start();
 		
 		while (true) {
+			Sender sender = new Sender();
+			Thread t = new Thread(sender);
+			
 			System.out.println("Input Client Message....");
 			String msg = scanner.nextLine();
 			if (msg.equals("q")) {
@@ -91,7 +93,7 @@ public class ClientChat {
 					dout.writeUTF(msg);
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println("Not Available");
 			}
 
 		}
@@ -120,7 +122,8 @@ public class ClientChat {
 					msg = din.readUTF();
 					System.out.println(msg);
 				} catch (IOException e) {
-					e.printStackTrace();
+					System.out.println("Exit Server User....");
+					break;
 				}
 
 			}
