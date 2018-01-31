@@ -13,6 +13,9 @@ public class Client {
 		int port = 7777;
 		OutputStream outs=null;
 		OutputStreamWriter ousw=null;
+		
+		
+		
 		try {
 			System.out.println("Start Client...");
 			socket = new Socket(ip,port);

@@ -12,20 +12,23 @@ public class Server {
 	public static void main(String[] args) {
 		
 		int a=0;
-
+		
 		ServerSocket serverSocket = null;
 		Socket socket = null;
 		InputStream in = null;
 		InputStreamReader inr = null;
 		BufferedReader br = null;
-
+		
+		
+		
+		
 		try {
 			serverSocket = new ServerSocket(7777);
 			InetAddress ia = InetAddress.getLocalHost();
 			System.out.println(ia.getHostName());
 			System.out.println(ia.getHostAddress());
 			System.out.println("Start Server....");
-
+			
 			while (true) {
 				socket = serverSocket.accept();// 서버를 기다리게 함.
 				// Receive Data...
@@ -36,7 +39,7 @@ public class Server {
 				String str = br.readLine();
 				System.out.println(str);
 				System.out.println("Receive Completed...");
-
+				
 				System.out.println("End Server....");
 			}
 
@@ -50,11 +53,10 @@ public class Server {
 				socket.close();
 				serverSocket.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-
+		
 	}
 
 }
